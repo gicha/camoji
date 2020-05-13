@@ -19,10 +19,10 @@ class CheckButtonWidget extends StatelessWidget {
         width: 20,
         height: 20,
         decoration: BoxDecoration(
-          color: isChoosed ? PLColors.primary : null,
+          color: isChoosed ? ITColors.general : null,
           border: Border.all(
             width: 1,
-            color: PLColors.primary,
+            color: ITColors.general,
           ),
           borderRadius: BorderRadius.circular(2),
         ),

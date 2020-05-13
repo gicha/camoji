@@ -40,10 +40,10 @@ class PLImage extends StatelessWidget {
           width: width,
           padding: EdgeInsets.symmetric(horizontal: 4),
           alignment: Alignment.center,
-          color: PLColors.primary,
+          color: ITColors.general,
           child: Text(
             "Не удалось загрузить изображение",
-            style: PLStyle.create(fontSize: 12, color: Colors.white),
+            style: ITStyle.create(fontSize: 12, color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ),

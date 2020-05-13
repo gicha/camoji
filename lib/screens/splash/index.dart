@@ -8,8 +8,8 @@ class SplashScreen extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
-        gradient: PLGradients.splash,
-        color: PLColors.bg,
+        gradient: ITGradients.splash,
+        color: ITColors.general,
       ),
     );
   }

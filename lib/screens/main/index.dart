@@ -11,7 +11,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text("Main", style: PLStyle.textAccent),
+      child: Text("Main", style: ITStyle.textGeneral),
     );
   }
 }

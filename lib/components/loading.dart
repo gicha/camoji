@@ -11,14 +11,14 @@ import '../global/i18n.dart';
 /// ```
 /// SpinKitChasingDots(
 ///   size: 64,
-///   color: PLColors.primary
+///   color: ITColors.primary
 /// )
 /// ```
 /// default [text] is
 /// ```
 /// const Text(
 ///   PLStrings.loading,
-///   style: TextStyle(color: PLColors.greyText, fontSize: 12),
+///   style: TextStyle(color: ITColors.greyText, fontSize: 12),
 /// )
 /// ```
 /// {@category Widgets}
@@ -44,7 +44,7 @@ class PLLoading extends StatelessWidget {
                   else
                     SpinKitPumpingHeart(
                       size: 64,
-                      color: PLColors.primary,
+                      color: ITColors.general,
                     ),
                   Container(
                     margin: EdgeInsets.only(top: 24),
@@ -53,7 +53,7 @@ class PLLoading extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
-                        color: PLColors.primary.withOpacity(.7),
+                        color: ITColors.general.withOpacity(.7),
                         fontFamily: 'Circe',
                       ),
                     ),

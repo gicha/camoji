@@ -1,7 +1,7 @@
 part of './theme.dart';
 
 //TODO: place here shadows
-class PLShadows {
+class ITShadows {
   static BoxShadow picture = BoxShadow(
     blurRadius: 10,
     offset: Offset(0, 7),

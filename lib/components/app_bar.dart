@@ -27,7 +27,7 @@ class PLAppBar extends StatelessWidget implements PreferredSizeWidget {
             clipper: AppBarClipper(),
             child: Container(
               decoration: BoxDecoration(
-                color: PLColors.bg,
+                color: ITColors.general,
                 image: DecorationImage(
                   image: ExactAssetImage(bgAsset),
                   fit: BoxFit.fitWidth,
@@ -62,7 +62,7 @@ class PLAppBar extends StatelessWidget implements PreferredSizeWidget {
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(40),
                       ),
-                      boxShadow: [PLShadows.appbar],
+                      boxShadow: [ITShadows.appbar],
                     ),
                   ),
                 ),

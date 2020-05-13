@@ -11,7 +11,7 @@ class _BoardingScreenState extends State<BoardingScreen> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text("Boarding", style: PLStyle.textAccent),
+      child: Text("Boarding", style: ITStyle.textGeneral),
     );
   }
 }
