@@ -1,4 +1,4 @@
-package team.itis.camoji
+package ru.camoji.app
 
 import io.flutter.embedding.android.FlutterActivity
 
