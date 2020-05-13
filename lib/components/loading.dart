@@ -54,7 +54,6 @@ class PLLoading extends StatelessWidget {
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: ITColors.general.withOpacity(.7),
-                        fontFamily: 'Circe',
                       ),
                     ),
                   )

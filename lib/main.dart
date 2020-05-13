@@ -28,8 +28,7 @@ void main() async {
   };
 
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runZonedGuarded(() {
     startHome();
@@ -64,10 +63,7 @@ startHome() {
               color: Colors.black,
               child: Text(
                 "Unexpected error. Please try later".i18n,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
               ),
             );
           };

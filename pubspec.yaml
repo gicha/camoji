@@ -37,6 +37,7 @@ dependencies:
   eva_icons_flutter:
   page_transition:
   google_fonts:
+  flutter_staggered_animations:
 
 
 dev_dependencies:
@@ -53,4 +54,25 @@ flutter:
     # Images
     
     # Icons
+  fonts:
+    - family: SFProRounded
+      fonts:
+        - asset: assets/fonts/100.otf
+          weight: 100
+        - asset: assets/fonts/200.otf
+          weight: 200
+        - asset: assets/fonts/300.otf
+          weight: 300
+        - asset: assets/fonts/400.otf
+          weight: 400
+        - asset: assets/fonts/500.otf
+          weight: 500
+        - asset: assets/fonts/600.otf
+          weight: 600
+        - asset: assets/fonts/700.otf
+          weight: 700
+        - asset: assets/fonts/800.otf
+          weight: 800
+        - asset: assets/fonts/900.otf
+          weight: 900
     

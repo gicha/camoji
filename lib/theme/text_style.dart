@@ -7,13 +7,15 @@ class ITStyle {
     FontStyle fontStyle,
     Color color,
     TextDecoration decoration,
+    String fontFamily,
   }) =>
-      GoogleFonts.montserrat(
+      TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontStyle: fontStyle,
         color: color ?? ITColors.black,
         decoration: decoration,
+        fontFamily: fontFamily ?? 'SFProRounded',
       );
 
   static TextStyle header = create(fontWeight: FontWeight.w500, fontSize: 24);
