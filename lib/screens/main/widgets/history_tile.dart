@@ -7,9 +7,11 @@ class HistoryTileWidget extends StatelessWidget {
     Key key,
     this.title,
     this.text,
+    this.textFontSize,
   }) : super(key: key);
   final String title;
   final String text;
+  final double textFontSize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +27,7 @@ class HistoryTileWidget extends StatelessWidget {
           ),
           Text(
             text,
-            style: ITStyle.textBlock,
+            style: ITStyle.textBlock.copyWith(fontSize: textFontSize ?? 16),
           ),
         ],
       ),

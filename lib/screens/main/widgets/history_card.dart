@@ -14,6 +14,7 @@ class HistoryCardWidget extends StatelessWidget {
         HistoryTileWidget(
           title: "Эмоция",
           text: ["☹️", "🙁", "😐", "😌", "😁"][(history.emotion / 20).floor()],
+          textFontSize: 25,
         ),
         HistoryTileWidget(
           title: "Время",
