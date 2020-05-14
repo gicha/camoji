@@ -38,6 +38,7 @@ dependencies:
   page_transition:
   google_fonts:
   flutter_staggered_animations:
+  flare_flutter:
 
 
 dev_dependencies:
@@ -50,10 +51,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:
+  assets:
+     # Flare animations
+    - assets/flare/
     # Images
     
     # Icons
+
   fonts:
     - family: SFProRounded
       fonts:

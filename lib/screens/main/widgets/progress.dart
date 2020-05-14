@@ -4,18 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:camoji/global/after_layout.dart';
 import 'package:camoji/theme/theme.dart';
 
+import '../../../theme/theme.dart';
+
 class ITProgress extends StatefulWidget {
   ITProgress({
-    this.selfEmission,
-    this.selfAbsorbtion,
-    this.globalEmission,
-    this.globalAbsorbtion,
+    this.percent,
     this.size,
   });
-  final double selfEmission;
-  final double selfAbsorbtion;
-  final double globalEmission;
-  final double globalAbsorbtion;
+
+  final double percent;
   final double size;
 
   @override
@@ -25,24 +22,16 @@ class ITProgress extends StatefulWidget {
 class _ITProgressState extends State<ITProgress> with SingleTickerProviderStateMixin, AfterLayoutMixin {
   AnimationController progressAnimationController;
 
-  Animation<double> selfProgressAnimation;
-  Animation<double> selfTextAnimation;
-
-  Animation<double> globalProgressAnimation;
-  Animation<double> globalTextAnimation;
+  Animation<double> progressAnimation;
+  Animation<double> textAnimation;
 
   @override
   void initState() {
     super.initState();
     progressAnimationController = AnimationController(vsync: this, duration: Duration(seconds: 2));
-    selfProgressAnimation = Tween<double>(begin: 0.0, end: widget.selfAbsorbtion / widget.selfEmission)
+    progressAnimation = Tween<double>(begin: 0.0, end: widget.percent / 100)
         .animate(CurvedAnimation(parent: progressAnimationController, curve: Curves.easeOutCubic));
-    selfTextAnimation = Tween<double>(begin: 0.0, end: widget.selfEmission - widget.selfAbsorbtion)
-        .animate(CurvedAnimation(parent: progressAnimationController, curve: Curves.easeOutCubic));
-
-    globalProgressAnimation = Tween<double>(begin: 0.0, end: widget.globalAbsorbtion / widget.globalEmission)
-        .animate(CurvedAnimation(parent: progressAnimationController, curve: Curves.easeOutCubic));
-    globalTextAnimation = Tween<double>(begin: 0.0, end: widget.globalEmission - widget.globalAbsorbtion)
+    textAnimation = Tween<double>(begin: 0.0, end: widget.percent / 100)
         .animate(CurvedAnimation(parent: progressAnimationController, curve: Curves.easeOutCubic));
   }
 
@@ -70,79 +59,22 @@ class _ITProgressState extends State<ITProgress> with SingleTickerProviderStateM
                   CustomPaint(
                     size: Size(size * .9, size * .9),
                     painter: ProgressPainter(
-                      value: globalProgressAnimation.value,
-                      backgroundColor: ITColors.grey,
-                      strokeWidth: size * .08,
+                      value: progressAnimation.value,
+                      backgroundColor: ITColors.black.withOpacity(0.1),
+                      strokeWidth: size * .1,
                       colors: [
-                        Color(0xff6CEEE6),
-                        Color(0xff883AEC),
+                        ITColors.general,
+                        ITColors.general,
                       ],
                     ),
                   ),
-                  CustomPaint(
-                    size: Size(size * .65, size * .65),
-                    painter: ProgressPainter(
-                      value: selfProgressAnimation.value,
-                      backgroundColor: ITColors.grey,
-                      strokeWidth: size * .08,
-                      colors: [
-                        Color(0xff57F9D2),
-                        Color(0xff1AB18D),
-                      ],
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        "YOUR",
-                        style: ITStyle.header.apply(color: ITColors.grey2),
-                      ),
-                      Text.rich(TextSpan(children: [
-                        TextSpan(
-                          text: selfTextAnimation.value.truncate().toString(),
-                          style: ITStyle.create(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "  KgCO\u2082",
-                          style: ITStyle.create(
-                            color: ITColors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ])),
-                    ],
+                  Text(
+                    ["☹️", "🙁", "😐", "😌", "😁"][(widget.percent / 20).floor()],
+                    style: ITStyle.create(fontSize: 70),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 18),
-            Text(
-              "COUNTRY AVERAGE",
-              style: ITStyle.header.apply(color: ITColors.grey2),
-            ),
-            Text.rich(TextSpan(children: [
-              TextSpan(
-                text: globalTextAnimation.value.truncate().toString(),
-                style: ITStyle.create(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  color: ITColors.grey,
-                ),
-              ),
-              TextSpan(
-                text: "  KgCO\u2082",
-                style: ITStyle.create(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: ITColors.grey,
-                ),
-              ),
-            ])),
           ],
         );
       },
@@ -191,9 +123,17 @@ class ProgressPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeWidth = strokeWidth * 1.2
         ..strokeCap = StrokeCap.round
-        ..maskFilter = MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(12)),
+        ..maskFilter = MaskFilter.blur(
+          BlurStyle.normal,
+          12 * 0.57735 + 0.5,
+        ),
     );
-    var gradient = RadialGradient(center: Alignment(-0.4, -0.6), radius: 1.2, stops: [0.2, 1], colors: colors);
+    var gradient = RadialGradient(
+      center: Alignment(-0.4, -0.6),
+      radius: 1.2,
+      stops: [0.2, 1],
+      colors: colors,
+    );
 
     final Paint paint = Paint()
       ..strokeWidth = strokeWidth
@@ -201,11 +141,13 @@ class ProgressPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..shader = gradient.createShader(Offset.zero & size);
 
-    canvas.drawArc(Offset.zero & size, arcStart, -arcSweep, false, paint);
-  }
-
-  static double convertRadiusToSigma(double radius) {
-    return radius * 0.57735 + 0.5;
+    canvas.drawArc(
+      Offset.zero & size,
+      arcStart,
+      -arcSweep,
+      false,
+      paint,
+    );
   }
 
   @override

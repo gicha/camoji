@@ -22,15 +22,15 @@ class InitProvider with ChangeNotifier {
       store
           .findFirst(DataBase.db, finder: Finder(filter: Filter.byKey("user")))
           .then((value) => serialized = value?.value),
-      Future.delayed(Duration(seconds: 2)) // delay for nice splash
+      Future.delayed(Duration(seconds: 0)) // delay for nice splash
     ]);
-    if (serialized == null) {
-      Api.init();
-      setState(InitState.boarding);
-    } else {
-      Api.init(""); //TODO: pass here some token
-      setState(InitState.inited);
-    }
+    // if (serialized == null) {
+    //   Api.init();
+    //   setState(InitState.boarding);
+    // } else {
+    //   Api.init("");
+    setState(InitState.inited);
+    // }
   }
 
   setState(InitState _state) {
