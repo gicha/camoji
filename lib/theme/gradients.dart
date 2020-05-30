@@ -1,6 +1,5 @@
 part of './theme.dart';
 
-//TODO: place here gradients
 class ITGradients {
   static LinearGradient splash = LinearGradient(
     colors: [

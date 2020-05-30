@@ -12,9 +12,8 @@ import 'package:cupertino_back_gesture/cupertino_back_gesture.dart';
 
 import 'global/i18n.dart';
 import 'providers/init.dart';
-import 'screens/boarding/index.dart';
+import 'providers/ros.dart';
 import 'screens/main/index.dart';
-import 'screens/splash/index.dart';
 
 final bool isInDebugMode = true;
 final globalNavigatorKey = GlobalKey<NavigatorState>();
@@ -70,23 +69,24 @@ startHome() {
           return MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => InitProvider()),
+              ChangeNotifierProvider(create: (_) => RosProvider()),
             ],
             child: I18n(child: child),
           );
         },
         home: Consumer<InitProvider>(
           builder: (_, InitProvider p, __) {
-            switch (p.state) {
-              case InitState.boarding:
-                return BoardingScreen();
-              case InitState.auth:
-                return MainScreen();
-              case InitState.inited:
-                return MainScreen();
-              case InitState.loading:
-              default:
-                return SplashScreen();
-            }
+            // switch (p.state) {
+            //   case InitState.boarding:
+            //     return BoardingScreen();
+            //   case InitState.auth:
+            //     return MainScreen();
+            //   case InitState.inited:
+            return MainScreen();
+            // case InitState.loading:
+            // default:
+            //   return SplashScreen();
+            // }
           },
         ),
       ),

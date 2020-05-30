@@ -5,7 +5,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/init.dart';
-import '../../providers/init.dart';
 import '../../theme/theme.dart';
 import 'provider.dart';
 import 'widgets/animated_list.dart';

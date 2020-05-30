@@ -39,6 +39,7 @@ dependencies:
   google_fonts:
   flutter_staggered_animations:
   flare_flutter:
+  roslib:
 
 
 dev_dependencies:

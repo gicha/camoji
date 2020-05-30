@@ -1,11 +1,14 @@
 import 'package:camoji/models/history.dart';
+import 'package:camoji/providers/ros.dart';
 import 'package:camoji/screens/main/widgets/history_card.dart';
 import 'package:camoji/theme/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../theme/theme.dart';
 import 'widgets/progress.dart';
+import 'widgets/title.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -23,10 +26,16 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<RosProvider>(context);
     return CupertinoPageScaffold(
       backgroundColor: ITColors.white,
       child: SafeArea(
-        child: Container(
+        child:
+            // StreamBuilder<Object>(
+            //   stream: provider..subscription,
+            //   builder: (context, snapshot) {
+            //     return
+            Container(
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
@@ -36,41 +45,30 @@ class _MainScreenState extends State<MainScreen> {
             ),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      "Статистика",
-                      style: ITStyle.header,
-                    ),
-                  ],
+                SizedBox(
+                  height: 20,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * .05,
-                  ),
-                  child: ITProgress(
-                    size: MediaQuery.of(context).size.width * .7,
-                    percent: 60,
-                  ),
+                TitleWidget("Статистика"),
+                ITProgress(
+                  size: MediaQuery.of(context).size.width * .7,
+                  percent: 60,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Последние сканирования",
-                      style: ITStyle.header,
-                    ),
-                  ],
-                ),
+                TitleWidget("Последние сканирования"),
                 SizedBox(
                   height: 20,
                 ),
                 ...List.generate(
                   history.length,
-                  (index) => HistoryCardWidget(history[index], index + 1 != history.length),
+                  (index) => HistoryCardWidget(
+                    history[index],
+                    index + 1 != history.length,
+                  ),
                 ),
               ],
             ),
           ),
+          //   );
+          // },
         ),
       ),
     );

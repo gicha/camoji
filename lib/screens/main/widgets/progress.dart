@@ -43,41 +43,46 @@ class _ITProgressState extends State<ITProgress> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     var size = widget.size - 36;
-    return AnimatedBuilder(
-      animation: progressAnimationController,
-      builder: (context, child) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              width: size + 36,
-              height: size + 36,
-              alignment: Alignment.center,
-              child: Stack(
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).size.height * .05,
+      ),
+      child: AnimatedBuilder(
+        animation: progressAnimationController,
+        builder: (context, child) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Container(
+                width: size + 36,
+                height: size + 36,
                 alignment: Alignment.center,
-                children: <Widget>[
-                  CustomPaint(
-                    size: Size(size * .9, size * .9),
-                    painter: ProgressPainter(
-                      value: progressAnimation.value,
-                      backgroundColor: ITColors.black.withOpacity(0.1),
-                      strokeWidth: size * .1,
-                      colors: [
-                        ITColors.general,
-                        ITColors.general,
-                      ],
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    CustomPaint(
+                      size: Size(size * .9, size * .9),
+                      painter: ProgressPainter(
+                        value: progressAnimation.value,
+                        backgroundColor: ITColors.black.withOpacity(0.1),
+                        strokeWidth: size * .1,
+                        colors: [
+                          ITColors.general,
+                          ITColors.general,
+                        ],
+                      ),
                     ),
-                  ),
-                  Text(
-                    ["☹️", "🙁", "😐", "😌", "😁"][(widget.percent / 20).floor()],
-                    style: ITStyle.create(fontSize: 70),
-                  ),
-                ],
+                    Text(
+                      ["☹️", "🙁", "😐", "😌", "😁"][(widget.percent / 20).floor()],
+                      style: ITStyle.create(fontSize: 70),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 }

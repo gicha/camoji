@@ -3,8 +3,6 @@ library api;
 import 'dart:convert';
 
 import 'package:camoji/main.dart';
-import 'package:camoji/models/models.dart';
-import 'package:camoji/models/serializers.dart';
 import 'package:dio/dio.dart';
 import 'package:camoji/global/config.dart';
 import 'package:flutter/foundation.dart' as foundation;
