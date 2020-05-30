@@ -24,15 +24,30 @@ class _ITProgressState extends State<ITProgress> with SingleTickerProviderStateM
 
   Animation<double> progressAnimation;
   Animation<double> textAnimation;
+  double lastPercent = 0;
+
+  updatePercent() {
+    progressAnimation = Tween<double>(
+      begin: lastPercent,
+      end: widget.percent / 100,
+    ).animate(
+      CurvedAnimation(
+        parent: progressAnimationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
+    lastPercent = widget.percent;
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
-    progressAnimationController = AnimationController(vsync: this, duration: Duration(seconds: 2));
-    progressAnimation = Tween<double>(begin: 0.0, end: widget.percent / 100)
-        .animate(CurvedAnimation(parent: progressAnimationController, curve: Curves.easeOutCubic));
-    textAnimation = Tween<double>(begin: 0.0, end: widget.percent / 100)
-        .animate(CurvedAnimation(parent: progressAnimationController, curve: Curves.easeOutCubic));
+    progressAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    updatePercent();
   }
 
   @override
@@ -42,6 +57,7 @@ class _ITProgressState extends State<ITProgress> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    if (lastPercent != widget.percent) updatePercent();
     var size = widget.size - 36;
     return Container(
       padding: EdgeInsets.symmetric(

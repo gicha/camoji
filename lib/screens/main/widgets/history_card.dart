@@ -13,20 +13,12 @@ class HistoryCardWidget extends StatelessWidget {
       children: [
         HistoryTileWidget(
           title: "Эмоция",
-          text: ["☹️", "🙁", "😐", "😌", "😁"][(history.emotion / 20).floor()],
+          text: ["☹️", "😐", "😁"][history.emotion.index],
           textFontSize: 25,
         ),
         HistoryTileWidget(
           title: "Время",
           text: history.time,
-        ),
-        HistoryTileWidget(
-          title: "Пол",
-          text: history.sex ? "М" : "Ж",
-        ),
-        HistoryTileWidget(
-          title: "Возраст",
-          text: history.age.toString(),
         ),
         SizedBox(
           height: 10,

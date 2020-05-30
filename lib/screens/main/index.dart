@@ -1,4 +1,3 @@
-import 'package:camoji/models/history.dart';
 import 'package:camoji/providers/ros.dart';
 import 'package:camoji/screens/main/widgets/history_card.dart';
 import 'package:camoji/theme/theme.dart';
@@ -16,26 +15,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<History> history = [
-    History(10, "сегодня 18:30", false, 20),
-    History(30, "сегодня 17:56", false, 13),
-    History(50, "сегодня 17:41", true, 49),
-    History(70, "сегодня 17:13", false, 34),
-    History(90, "сегодня 16:28", true, 56),
-  ];
-
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<RosProvider>(context);
+
     return CupertinoPageScaffold(
       backgroundColor: ITColors.white,
       child: SafeArea(
-        child:
-            // StreamBuilder<Object>(
-            //   stream: provider..subscription,
-            //   builder: (context, snapshot) {
-            //     return
-            Container(
+        child: Container(
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
@@ -51,24 +38,22 @@ class _MainScreenState extends State<MainScreen> {
                 TitleWidget("Статистика"),
                 ITProgress(
                   size: MediaQuery.of(context).size.width * .7,
-                  percent: 60,
+                  percent: ((provider.summEmotion / provider.history.length.clamp(1, double.infinity)) ?? 0.0) * 100,
                 ),
                 TitleWidget("Последние сканирования"),
                 SizedBox(
                   height: 20,
                 ),
                 ...List.generate(
-                  history.length,
+                  provider.history.length,
                   (index) => HistoryCardWidget(
-                    history[index],
-                    index + 1 != history.length,
+                    provider.history[provider.history.length - 1 - index],
+                    index + 1 != provider.history.length,
                   ),
                 ),
               ],
             ),
           ),
-          //   );
-          // },
         ),
       ),
     );

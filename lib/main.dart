@@ -13,7 +13,11 @@ import 'package:cupertino_back_gesture/cupertino_back_gesture.dart';
 import 'global/i18n.dart';
 import 'providers/init.dart';
 import 'providers/ros.dart';
+import 'screens/boarding/index.dart';
 import 'screens/main/index.dart';
+import 'package:intl/intl.dart';
+
+import 'screens/splash/index.dart';
 
 final bool isInDebugMode = true;
 final globalNavigatorKey = GlobalKey<NavigatorState>();
@@ -23,12 +27,18 @@ void main() async {
     if (isInDebugMode)
       FlutterError.dumpErrorToConsole(details);
     else
-      Zone.current.handleUncaughtError(details.exception, details.stack);
+      Zone.current.handleUncaughtError(
+        details.exception,
+        details.stack,
+      );
   };
 
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  Intl.defaultLocale = "ru";
   runZonedGuarded(() {
     startHome();
   }, (error, stackTrace) async {
@@ -62,7 +72,9 @@ startHome() {
               color: Colors.black,
               child: Text(
                 "Unexpected error. Please try later".i18n,
-                style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.headline6.copyWith(
+                      color: Colors.white,
+                    ),
               ),
             );
           };
@@ -76,17 +88,17 @@ startHome() {
         },
         home: Consumer<InitProvider>(
           builder: (_, InitProvider p, __) {
-            // switch (p.state) {
-            //   case InitState.boarding:
-            //     return BoardingScreen();
-            //   case InitState.auth:
-            //     return MainScreen();
-            //   case InitState.inited:
-            return MainScreen();
-            // case InitState.loading:
-            // default:
-            //   return SplashScreen();
-            // }
+            switch (p.state) {
+              case InitState.boarding:
+                return BoardingScreen();
+              case InitState.auth:
+                return MainScreen();
+              case InitState.inited:
+                return MainScreen();
+              case InitState.loading:
+              default:
+                return SplashScreen();
+            }
           },
         ),
       ),

@@ -111,9 +111,9 @@ class _BoardingScreenState extends State<BoardingScreen> with SingleTickerProvid
                                           ),
                                         ),
                                   Opacity(
-                                    opacity: provider.status == AuthStatus.Loading ? .6 : 1,
+                                    opacity: (provider.status == AuthStatus.Found) ? 1 : .6,
                                     child: Text(
-                                      provider.status == AuthStatus.Loading ? 'Идет поиск устройства...' : 'Подключено',
+                                      provider.status == AuthStatus.Found ? 'Подключено' : 'Идет поиск устройства...',
                                       style: ITStyle.captionWhite,
                                       textAlign: TextAlign.center,
                                     ),
@@ -131,7 +131,9 @@ class _BoardingScreenState extends State<BoardingScreen> with SingleTickerProvid
                             child: ITButton(
                               text: provider.status == AuthStatus.Found ? 'Далее' : 'Найти устройство',
                               style: ButtonStyle.White,
-                              type: provider.status == AuthStatus.Loading ? ButtonType.Unactive : ButtonType.Active,
+                              type: (provider.status == AuthStatus.Found || provider.status == AuthStatus.Start)
+                                  ? ButtonType.Active
+                                  : ButtonType.Unactive,
                               onTap: () {
                                 if (provider.status == AuthStatus.Start) provider.startSearch();
                                 if (provider.status == AuthStatus.Found) InitProvider().setState(InitState.inited);

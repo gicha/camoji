@@ -1,13 +1,11 @@
+enum EmotionType { negative, neutral, positive }
+
 class History {
-  final double emotion;
+  final EmotionType emotion;
   final String time;
-  final bool sex;
-  final int age;
 
   History(
     this.emotion,
     this.time,
-    this.sex,
-    this.age,
   );
 }
