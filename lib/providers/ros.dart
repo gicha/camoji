@@ -23,7 +23,7 @@ class RosProvider with ChangeNotifier {
   RosState state = RosState.loading;
 
   Future init() async {
-    ros = Ros(url: 'ws://192.168.1.59:9090');
+    ros = Ros(url: 'ws://192.168.1.84:9090');
     ros.connect();
     emotion = Topic(
       ros: ros,
@@ -48,20 +48,20 @@ class RosProvider with ChangeNotifier {
     ]);
     emotion.subscription.listen(
       (item) => updateData(
-        emotion: item["msg"]["data"],
+        emotionString: item["msg"]["data"],
       ),
     );
     date.subscription.listen(
       (item) => updateData(
-        date: double.tryParse(item["msg"]["data"]).floor(),
+        dateFromEpoch: double.tryParse(item["msg"]["data"]).floor(),
       ),
     );
   }
 
-  updateData({String emotion, int date}) {
+  updateData({String emotionString, int dateFromEpoch}) {
     newItem = History(
-      formatEmotion(emotion) ?? newItem?.emotion,
-      formatDate(date) ?? newItem?.time,
+      formatEmotion(emotionString) ?? newItem?.emotion,
+      formatDate(dateFromEpoch) ?? newItem?.time,
     );
     if (newItem?.emotion != null && newItem?.time != null) {
       history.add(newItem);
@@ -71,7 +71,7 @@ class RosProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  formatDate(int date) {
+  String formatDate(int date) {
     if (date == null) return null;
     DateTime d = DateTime.fromMillisecondsSinceEpoch(
       date * 1000,
@@ -81,9 +81,9 @@ class RosProvider with ChangeNotifier {
     return DateFormat("d MMMM 'в' H:mm").format(d);
   }
 
-  formatEmotion(String emotion) {
+  EmotionType formatEmotion(String emotion) {
     EmotionType formatEmotion;
-    switch (emotion) {
+    switch (emotion?.toLowerCase()) {
       case "negative":
         formatEmotion = EmotionType.negative;
         break;
